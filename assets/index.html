@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Tol Malaysia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+</head>
+<body>
 
+    <header class="header">
+        <h1>Kalkulator Tol Malaysia</h1>
+        <p>Rancang perjalanan anda dengan anggaran kos tol dan bahan api yang tepat.</p>
+    </header>
+
+    <main class="container">
+        <div class="calculator">
+            <div class="calculator__form">
+                <div class="form-group">
+                    <label for="origin">Dari (Origin):</label>
+                    <input type="text" id="origin" placeholder="e.g., KLCC, Kuala Lumpur">
+                </div>
+                <div class="form-group">
+                    <label for="destination">Ke (Destination):</label>
+                    <input type="text" id="destination" placeholder="e.g., Queensbay Mall, Penang">
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-class">Kelas Kenderaan:</label>
+                    <select id="vehicle-class">
+                        <option value="1">🚗 Kelas 1 (Kereta, SUV, MPV)</option>
+                        <option value="2">🚚 Kelas 2 (Van, Lori Kecil)</option>
+                        <option value="3">🚛 Kelas 3 (Lori Besar)</option>
+                        <option value="4">🚕 Kelas 4 (Teksi)</option>
+                        <option value="5">🚌 Kelas 5 (Bas)</option>
+                    </select>
+                </div>
+                <button id="calculate-btn" class="btn">Kira Anggaran</button>
+            </div>
+
+            <div id="results" class="calculator__results hidden">
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Mengira laluan dan kos tol...</p>
+                </div>
+                <div id="error-message" class="hidden"></div>
+                
+                <div id="results-content" class="hidden">
+                    <div class="results-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Anggaran Tol</span>
+                            <span id="total-toll" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Jarak</span>
+                            <span id="total-distance" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Masa Perjalanan</span>
+                            <span id="total-time" class="summary-value"></span>
+                        </div>
+                    </div>
+
+                    <div class="advanced-module">
+                        <h3 class="module-title">Anggaran Kos Bahan Api</h3>
+                        <div class="fuel-form">
+                            <div class="form-group-inline">
+                                <label for="fuel-type">Jenis Bahan Api:</label>
+                                <select id="fuel-type">
+                                    <option value="ron95">RON95</option>
+                                    <option value="ron97">RON97</option>
+                                    <option value="diesel">Diesel</option>
+                                </select>
+                            </div>
+                             <div class="form-group-inline">
+                                <label for="fuel-efficiency">Kecekapan (km/L):</label>
+                                <input type="number" id="fuel-efficiency" value="14.0" step="0.1">
+                            </div>
+                        </div>
+                        <div class="fuel-result">
+                            <span class="fuel-label">Anggaran Kos Bahan Api:</span>
+                            <span id="fuel-cost" class="fuel-value"></span>
+                        </div>
+                         <div class="total-cost">
+                            <span class="total-label">JUMLAH KOS PERJALANAN (Tol + Bahan Api)</span>
+                            <span id="total-journey-cost" class="total-value"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="detailed-breakdown">
+                        <h3 class="module-title">Perincian Tol Sepanjang Laluan</h3>
+                        <ul id="toll-breakdown-list">
+                        </ul>
+                    </div>
+                    <p class="data-timestamp">Data dikemaskini pada: <span id="data-update-timestamp"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="map" class="map-container"></div>
+    </main>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS1zvyJxFP0yykhBieqFh1qaHGuWROrqg&libraries=places"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    
+    <script src="database.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
